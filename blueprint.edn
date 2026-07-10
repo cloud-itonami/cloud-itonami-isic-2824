@@ -1,0 +1,12 @@
+{:itonami.blueprint/id "cloud-itonami-isic-2824"
+ :itonami.blueprint/name "Manufacture of Machinery for Mining, Quarrying and Construction"
+ :itonami.blueprint/isic-rev5 "2824"
+ :itonami.blueprint/domain :manufacturing/construction-mining-machinery
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:industrial-safety :supply-resilience :industrial-jobs]
+ :itonami.blueprint/governor :heavyequip-governor
+ :itonami.blueprint/robotics true
+ :itonami.blueprint/required-technologies [:robotics :cae :dmn :bpmn :audit-ledger]
+ :itonami.blueprint/optional-technologies [:telemetry :optimization]
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented}
