@@ -1,63 +1,147 @@
-<html><head><meta charset="utf-8"><title>cloud-itonami-isic-2824 · heavy-equipment plant</title><style>
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.ok { color: #137a3f; }
-body { font-family: system-ui,-apple-system,sans-serif; margin: 0; color: #1a1a1a; background: #fafafa; }
-header.bar { display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: #fff; border-bottom: 1px solid #e5e5e5; }
-th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
-h2 { margin-top: 0; font-size: 15px; }
-.warn { color: #b25c00; background: #fff8e1; padding: 2px 6px; border-radius: 4px; }
-main { max-width: 980px; margin: 24px auto; padding: 0 20px; }
-header.bar h1 { font-size: 18px; margin: 0; font-weight: 600; }
-.muted { color: #888; font-size: 13px; }
-.critical { color: #fff; background: #b3261e; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
-.card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-.err { color: #b3261e; background: #fbe9e7; padding: 2px 6px; border-radius: 4px; }
-th { font-weight: 600; color: #555; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-header.bar .badge { margin-left: auto; font-size: 12px; color: #666; }
-code { font-size: 12px; background: #f4f4f4; padding: 1px 4px; border-radius: 3px; }
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cloud-itonami-isic-2824 · heavy-equipment plant · Operator Console</title>
+<style>
+:root { --ink:#1a1a1a; --muted:#6b6b6b; --line:#e5e5e5; --bg:#fafafa;
+        --ok:#137a3f; --ok-bg:#e8f5ec; --warn:#8a5300; --warn-bg:#fff8e1;
+        --crit:#b3261e; --crit-bg:#fbe9e7; }
+* { box-sizing: border-box; }
+body { font-family: system-ui,-apple-system,'Hiragino Sans','Noto Sans JP',sans-serif;
+       margin:0; color:var(--ink); background:var(--bg); line-height:1.55; }
+header.bar { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+             padding:14px 20px; background:#fff; border-bottom:1px solid var(--line); }
+header.bar h1 { font-size:18px; margin:0; font-weight:650; letter-spacing:.01em; }
+header.bar .badge { margin-left:auto; font-size:12px; color:var(--muted); }
+main { max-width:1100px; margin:24px auto; padding:0 20px; }
+.card { background:#fff; border:1px solid var(--line); border-radius:10px;
+        padding:16px 18px; margin-bottom:16px; }
+h2 { margin:0 0 6px; font-size:15px; font-weight:650; }
+p.muted { color:var(--muted); font-size:13px; margin:0 0 12px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { text-align:left; padding:6px 10px; border-bottom:1px solid var(--line);
+     font-size:11px; font-weight:650; color:var(--muted);
+     text-transform:uppercase; letter-spacing:.05em; white-space:nowrap; }
+td { text-align:left; padding:7px 10px; border-bottom:1px solid #f2f2f2;
+     vertical-align:top; }
+tr:last-child td { border-bottom:none; }
+code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px;
+       background:#f4f4f5; padding:1px 5px; border-radius:4px; white-space:nowrap; }
+.ok { color:var(--ok); }
+.muted { color:var(--muted); }
+.warn { color:var(--warn); background:var(--warn-bg); padding:1px 6px; border-radius:4px; }
+.critical { color:#fff; background:var(--crit); padding:1px 6px; border-radius:4px;
+            font-weight:600; }
+footer { max-width:1100px; margin:0 auto 40px; padding:0 20px;
+         color:var(--muted); font-size:12px; }
 </style></head><body>
 <header class="bar">
-  <h1>Heavy-equipment plant (ISIC 2824) — Operator Console</h1>
-  <span class="badge">read-only sample · governor-gated · never dispatches hardware</span>
+  <h1>Mining, quarrying &amp; construction machinery manufacture (ISIC 2824) — Operator Console</h1>
+  <span class="badge">generated · governor-gated · never dispatches hardware</span>
 </header>
 <main>
   <section class="card">
     <h2>Units</h2>
-    <p class="muted">Demo snapshot — live data from <code>heavyequip.store</code> / <code>clojure -M:dev:run</code>.</p>
+    <p class="muted">Every row is the live record in <code>heavyequip.store</code> after the run. The stability-margin column calls <code>heavyequip.registry/unit-stability-margin-out-of-range?</code> — the same predicate the governor uses — rather than restating its conclusion.</p>
     <table>
-      <thead><tr><th>Unit</th><th>Name</th><th>Jurisdiction</th><th>Stability margin</th><th>Stability/brake</th><th>Status</th></tr></thead>
+      <thead><tr><th>Unit</th><th>Name</th><th>Jurisdiction</th><th>Stability margin vs spec</th><th>Stability/brake defect</th><th>Actuation lifecycle</th><th>Last decision</th></tr></thead>
       <tbody>
-        <tr><td>unit-1</td><td>Sakura Hydraulic Excavator EX-220</td><td>JPN</td><td class="ok">0.05 ∈ [-0.10,0.10]</td><td class="ok">resolved</td><td class="ok">ready</td></tr>
-        <tr><td>unit-2</td><td>Atlantis Wheel Loader WL-08</td><td>ATL</td><td class="ok">in-spec</td><td class="ok">—</td><td><span class="err">no spec-basis</span></td></tr>
-        <tr><td>unit-3</td><td>鈴木ブルドーザ BD-15</td><td>JPN</td><td><span class="err">0.35 out of range</span></td><td class="ok">—</td><td><span class="warn">HARD hold on dispatch</span></td></tr>
-        <tr><td>unit-4</td><td>田中ダンプトラック DT-30</td><td>JPN</td><td class="ok">in-spec</td><td><span class="err">unresolved</span></td><td><span class="critical">stability/brake hold</span></td></tr>
+        <tr><td><code>unit-1</code></td><td>Sakura Hydraulic Excavator EX-220</td><td>JPN</td><td><span class="ok">0.05 ∈ [-0.1,0.1]</span></td><td><span class="ok">none on record</span></td><td><span class="ok">dispatched + certified</span> <code>JPN-HEQ-000000 / JPN-STB-000000</code></td><td><span class="critical">HARD hold</span> <code>already-certified</code></td></tr>
+        <tr><td><code>unit-2</code></td><td>Atlantis Wheel Loader WL-08</td><td>ATL</td><td><span class="ok">0.05 ∈ [-0.1,0.1]</span></td><td><span class="ok">none on record</span></td><td><span class="muted">not actuated</span></td><td><span class="critical">HARD hold</span> <code>evidence-incomplete</code></td></tr>
+        <tr><td><code>unit-3</code></td><td>鈴木ブルドーザ BD-15</td><td>JPN</td><td><span class="critical">0.35 ∉ [-0.1,0.1]</span></td><td><span class="ok">none on record</span></td><td><span class="muted">not actuated</span></td><td><span class="critical">HARD hold</span> <code>unit-stability-margin-out-of-range</code></td></tr>
+        <tr><td><code>unit-4</code></td><td>田中ダンプトラック DT-30</td><td>JPN</td><td><span class="ok">0.05 ∈ [-0.1,0.1]</span></td><td><span class="critical">unresolved</span></td><td><span class="muted">not actuated</span></td><td><span class="critical">HARD hold</span> <code>stability-brake-test-defect-unresolved</code></td></tr>
       </tbody>
     </table>
   </section>
   <section class="card">
-    <h2>Action gate (Heavy Equipment Governor)</h2>
-    <p class="muted">HARD holds cannot be overridden. Actuation always escalates to a human heavy-equipment manufacturing engineer.</p>
+    <h2>Governor HARD holds (6 in this run, 6 distinct rules)</h2>
+    <p class="muted">Un-overridable refusals: a human approver is never offered these. Each row is a <code>:governor-hold</code> fact the run actually emitted, with the detail string the governor itself wrote.</p>
     <table>
-      <thead><tr><th>Op</th><th>Stake</th><th>Gate</th></tr></thead>
+      <thead><tr><th>Op</th><th>Unit</th><th>Rule</th><th>Detail</th><th>Advisor confidence</th></tr></thead>
       <tbody>
-        <tr><td><code>:unit/intake</code></td><td>none</td><td><span class="ok">phase-3 auto when clean</span></td></tr>
-        <tr><td><code>:design-rules/verify</code></td><td>none</td><td><span class="warn">human approval · no fabricated design rules</span></td></tr>
-        <tr><td><code>:stability-brake-test/screen</code></td><td>none</td><td><span class="critical">HARD hold if unresolved defect</span></td></tr>
-        <tr><td><code>:actuation/dispatch-unit</code></td><td class="critical">safety-critical</td><td><span class="warn">always human · stability margin + evidence checks</span></td></tr>
-        <tr><td><code>:actuation/issue-stability-certificate</code></td><td class="critical">safety-critical</td><td><span class="warn">always human · stability/brake + double-issue guard</span></td></tr>
+        <tr><td><code>design-rules/verify</code></td><td><code>unit-2</code></td><td><span class="critical">no-spec-basis</span></td><td>公式spec-basisの引用が無い提案は設計規則要件として扱えない</td><td>0.9</td></tr>
+        <tr><td><code>actuation/dispatch-unit</code></td><td><code>unit-2</code></td><td><span class="critical">evidence-incomplete</span></td><td>法域の必要書類(CAEシミュレーション報告書/ISO10262安定性試験報告書/ISO3450制動性能試験報告書/材料証明記録等)が充足していない状態での提案</td><td>0.9</td></tr>
+        <tr><td><code>actuation/dispatch-unit</code></td><td><code>unit-3</code></td><td><span class="critical">unit-stability-margin-out-of-range</span></td><td>unit-3 の実測安定性マージン偏差(0.35)が仕様範囲[-0.1,0.1]を逸脱</td><td>0.3</td></tr>
+        <tr><td><code>stability-brake-test/screen</code></td><td><code>unit-4</code></td><td><span class="critical">stability-brake-test-defect-unresolved</span></td><td>未解決の安定性/制動試験欠陥がある状態での安定性証明書発行提案は進められない</td><td>0.95</td></tr>
+        <tr><td><code>actuation/dispatch-unit</code></td><td><code>unit-1</code></td><td><span class="critical">already-dispatched</span></td><td>unit-1 は既に実行済み</td><td>0.9</td></tr>
+        <tr><td><code>actuation/issue-stability-certificate</code></td><td><code>unit-1</code></td><td><span class="critical">already-certified</span></td><td>unit-1 は既に安定性証明書発行済み</td><td>0.9</td></tr>
       </tbody>
     </table>
   </section>
   <section class="card">
-    <h2>Social hand-off</h2>
-    <p class="muted">Audit package for type-approval inspectors / market-regulator inspectors — <code>heavyequip.export/audit-package</code> and <code>package-&gt;csv-bundle</code> (units / ledger / dispatches / stability-certificates CSV).</p>
+    <h2>Action gate — phase 3 (supervised-auto)</h2>
+    <p class="muted">Derived by calling <code>heavyequip.phase/gate</code> for each op in <code>phase/write-ops</code>, so this table cannot drift from the policy the actor enforces. The confidence floor is <code>0.6</code>; the high-stakes set is <code>heavyequip.governor/high-stakes</code>.</p>
     <table>
-      <thead><tr><th>Artifact</th><th>Kind</th><th>Note</th></tr></thead>
+      <thead><tr><th>Op</th><th>Phase</th><th>If governor is clean</th><th>If governor holds</th><th>High stakes</th></tr></thead>
       <tbody>
-        <tr><td>JPN-HEQ-000000</td><td>unit-dispatch-draft</td><td>unsigned · plant signs offline</td></tr>
-        <tr><td>JPN-STB-000000</td><td>stability-certificate-draft</td><td>unsigned · type-approval authority submission is plant act</td></tr>
+        <tr><td><code>actuation/dispatch-unit</code></td><td>supervised-auto</td><td><span class="warn">human approval · phase-approval</span></td><td><span class="critical">hold</span></td><td><span class="critical">always human · never auto at any phase</span></td></tr>
+        <tr><td><code>actuation/issue-stability-certificate</code></td><td>supervised-auto</td><td><span class="warn">human approval · phase-approval</span></td><td><span class="critical">hold</span></td><td><span class="critical">always human · never auto at any phase</span></td></tr>
+        <tr><td><code>design-rules/verify</code></td><td>supervised-auto</td><td><span class="warn">human approval · phase-approval</span></td><td><span class="critical">hold</span></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>stability-brake-test/screen</code></td><td>supervised-auto</td><td><span class="warn">human approval · phase-approval</span></td><td><span class="critical">hold</span></td><td><span class="muted">—</span></td></tr>
+        <tr><td><code>unit/intake</code></td><td>supervised-auto</td><td><span class="ok">auto-commit</span></td><td><span class="critical">hold</span></td><td><span class="muted">—</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="card">
+    <h2>Jurisdiction spec-basis coverage</h2>
+    <p class="muted">From <code>heavyequip.facts/catalog</code>. Coverage is reported honestly: a jurisdiction absent from the catalog has NO spec-basis and the governor refuses to invent one. Of the 2 jurisdiction(s) these units actually use, 1 are covered (missing: <code>ATL</code>).</p>
+    <table>
+      <thead><tr><th>ISO3</th><th>Name</th><th>Owning authority</th><th>Required evidence items</th><th>Seeded units</th></tr></thead>
+      <tbody>
+        <tr><td><code>ATL</code></td><td><span class="critical">no spec-basis on file</span></td><td><span class="muted">—</span></td><td><span class="muted">0</span></td><td>1</td></tr>
+        <tr><td><code>DEU</code></td><td>Germany</td><td>DGUV / DIN / EU-Maschinenrichtlinie (Erdbaumaschinen)</td><td>4</td><td>0</td></tr>
+        <tr><td><code>GBR</code></td><td>United Kingdom</td><td>HSE / UKCA earthmoving-machinery framework (BS EN 474 series)</td><td>4</td><td>0</td></tr>
+        <tr><td><code>JPN</code></td><td>Japan</td><td>経済産業省 (METI) / 国土交通省 (MLIT) / 日本産業規格 (JIS) 建設機械関連</td><td>4</td><td>3</td></tr>
+        <tr><td><code>USA</code></td><td>United States</td><td>OSHA / SAE International (ROPS &amp; earth-moving machinery safety)</td><td>4</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="card">
+    <h2>Registry drafts produced</h2>
+    <p class="muted">Built by <code>heavyequip.registry</code> from the jurisdiction-scoped sequence counter. These are DRAFT book-of-record entries — the attached credentials are unsigned and <code>issued_by_registry</code> is false. Nothing here dispatched real hardware or signed a real certificate.</p>
+    <table>
+      <thead><tr><th>Record id</th><th>Kind</th><th>Unit</th><th>Jurisdiction</th><th>Immutable</th></tr></thead>
+      <tbody>
+        <tr><td><code>JPN-HEQ-000000</code></td><td>unit-dispatch-draft</td><td><code>unit-1</code></td><td>JPN</td><td><span class="ok">yes</span></td></tr>
+        <tr><td><code>JPN-STB-000000</code></td><td>stability-certificate-draft</td><td><code>unit-1</code></td><td>JPN</td><td><span class="ok">yes</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="card">
+    <h2>Approver attribution (measured, not asserted)</h2>
+    <p class="muted">This run granted 5 human approvals, each by <code>op-1</code>. Measured at render time by scanning the committed store surfaces for a key naming an approver: 3 of 5 kept the approver identity in the SSoT, and 0 of 5 can be answered from the append-only ledger. For <code>unit/mark-dispatched</code>, <code>unit/mark-certified</code> the committed record does <strong>not</strong> retain who approved it — <code>heavyequip.operation</code> does attach <code>:approved-by</code> to the record's <code>:payload</code>, but those <code>commit-record!</code> branches re-draft the record from <code>heavyequip.registry</code> and read neither <code>:payload</code> nor <code>:value</code>. The ledger does not close the gap either: the <code>:approval-granted</code> fact exists only in the graph run's <code>:audit</code> channel and is never appended by the <code>:commit</code> node, so after the run ends &quot;who approved this dispatch&quot; is unanswerable from this store. Stated rather than patched: changing commit semantics is a governance decision with its own contract tests.</p>
+    <table>
+      <thead><tr><th>Op</th><th>Unit</th><th>Approved by (in-run)</th><th>Store surfaces written</th><th>Approver found in SSoT</th><th>In ledger</th></tr></thead>
+      <tbody>
+        <tr><td><code>design-rules/verify</code></td><td><code>unit-1</code></td><td>op-1</td><td>requirements verification</td><td><span class="ok">approved-by=op-1</span></td><td><span class="critical">no</span></td></tr>
+        <tr><td><code>stability-brake-test/screen</code></td><td><code>unit-1</code></td><td>op-1</td><td>stability/brake screening</td><td><span class="ok">approved-by=op-1</span></td><td><span class="critical">no</span></td></tr>
+        <tr><td><code>actuation/dispatch-unit</code></td><td><code>unit-1</code></td><td>op-1</td><td>unit record, unit-dispatch draft</td><td><span class="critical">not retained by any surface</span></td><td><span class="critical">no</span></td></tr>
+        <tr><td><code>actuation/issue-stability-certificate</code></td><td><code>unit-1</code></td><td>op-1</td><td>unit record, stability-certificate draft</td><td><span class="critical">not retained by any surface</span></td><td><span class="critical">no</span></td></tr>
+        <tr><td><code>design-rules/verify</code></td><td><code>unit-3</code></td><td>op-1</td><td>requirements verification</td><td><span class="ok">approved-by=op-1</span></td><td><span class="critical">no</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="card">
+    <h2>Audit ledger — 12 facts</h2>
+    <p class="muted">The append-only decision log exactly as the run left it: 6 commits and 6 holds.</p>
+    <table>
+      <thead><tr><th>#</th><th>Fact</th><th>Op</th><th>Unit</th><th>Disposition</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="ok">committed</span></td><td><code>unit/intake</code></td><td><code>unit-1</code></td><td>commit</td><td>id, unit-name</td></tr>
+        <tr><td>2</td><td><span class="ok">committed</span></td><td><code>design-rules/verify</code></td><td><code>unit-1</code></td><td>commit</td><td>労働安全衛生法 (建設機械) / JIS A 8403 (ブルドーザ) / JIS A 8411 (油圧ショベル) (参考), https://www.jisc.go.jp/</td></tr>
+        <tr><td>3</td><td><span class="ok">committed</span></td><td><code>stability-brake-test/screen</code></td><td><code>unit-1</code></td><td>commit</td><td>stability-brake-check</td></tr>
+        <tr><td>4</td><td><span class="ok">committed</span></td><td><code>actuation/dispatch-unit</code></td><td><code>unit-1</code></td><td>commit</td><td>unit-1</td></tr>
+        <tr><td>5</td><td><span class="ok">committed</span></td><td><code>actuation/issue-stability-certificate</code></td><td><code>unit-1</code></td><td>commit</td><td>unit-1</td></tr>
+        <tr><td>6</td><td><span class="critical">governor-hold</span></td><td><code>design-rules/verify</code></td><td><code>unit-2</code></td><td>hold</td><td>no-spec-basis</td></tr>
+        <tr><td>7</td><td><span class="critical">governor-hold</span></td><td><code>actuation/dispatch-unit</code></td><td><code>unit-2</code></td><td>hold</td><td>evidence-incomplete</td></tr>
+        <tr><td>8</td><td><span class="ok">committed</span></td><td><code>design-rules/verify</code></td><td><code>unit-3</code></td><td>commit</td><td>労働安全衛生法 (建設機械) / JIS A 8403 (ブルドーザ) / JIS A 8411 (油圧ショベル) (参考), https://www.jisc.go.jp/</td></tr>
+        <tr><td>9</td><td><span class="critical">governor-hold</span></td><td><code>actuation/dispatch-unit</code></td><td><code>unit-3</code></td><td>hold</td><td>unit-stability-margin-out-of-range</td></tr>
+        <tr><td>10</td><td><span class="critical">governor-hold</span></td><td><code>stability-brake-test/screen</code></td><td><code>unit-4</code></td><td>hold</td><td>stability-brake-test-defect-unresolved</td></tr>
+        <tr><td>11</td><td><span class="critical">governor-hold</span></td><td><code>actuation/dispatch-unit</code></td><td><code>unit-1</code></td><td>hold</td><td>already-dispatched</td></tr>
+        <tr><td>12</td><td><span class="critical">governor-hold</span></td><td><code>actuation/issue-stability-certificate</code></td><td><code>unit-1</code></td><td>hold</td><td>already-certified</td></tr>
       </tbody>
     </table>
   </section>
 </main>
+<footer>Generated by <code>heavyequip.render-html</code> (<code>clojure -M:dev:render-html</code>) from a single deterministic run of the real actor graph against <code>heavyequip.store/demo-data</code>. No timestamps, no sampling: byte-identical on every rebuild from the same source.</footer>
 </body></html>
