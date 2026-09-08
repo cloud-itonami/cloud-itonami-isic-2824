@@ -29,7 +29,7 @@
   (that is `heavyequip.operation`'s `:actuation/dispatch-unit`/
   `:actuation/issue-stability-certificate`, always human-gated -- see
   README `Actuation`)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn- unsigned-certificate
   "Every certificate this actor produces is UNSIGNED -- signature is the
@@ -74,7 +74,7 @@
     (throw (ex-info "unit-dispatch: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "unit-dispatch: sequence must be >= 0" {})))
-  (let [dispatch-number (str (str/upper-case jurisdiction) "-HEQ-" (zero-pad sequence 6))
+  (let [dispatch-number (str (str/upper jurisdiction) "-HEQ-" (zero-pad sequence 6))
         record {"record_id" dispatch-number
                 "kind" "unit-dispatch-draft"
                 "unit_id" unit-id
@@ -100,7 +100,7 @@
     (throw (ex-info "stability-certificate: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "stability-certificate: sequence must be >= 0" {})))
-  (let [certificate-number (str (str/upper-case jurisdiction) "-STB-" (zero-pad sequence 6))
+  (let [certificate-number (str (str/upper jurisdiction) "-STB-" (zero-pad sequence 6))
         record {"record_id" certificate-number
                 "kind" "stability-certificate-draft"
                 "unit_id" unit-id
