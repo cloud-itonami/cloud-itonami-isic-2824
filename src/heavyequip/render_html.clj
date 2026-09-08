@@ -37,7 +37,7 @@
 
   Usage: `clojure -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [heavyequip.facts :as facts]
             [heavyequip.governor :as governor]
             [heavyequip.operation :as op]
@@ -164,7 +164,7 @@
     (->> m
          (filter (fn [[k v]]
                    (and (some? v)
-                        (str/includes? (str/lower-case (str/replace (str k) "_" "-"))
+                        (str/includes? (str/lower (str/replace (str k) "_" "-"))
                                        "approv"))))
          (sort-by (comp str key))
          first)))
