@@ -18,10 +18,10 @@
   :dev {:override-deps
         {io.github.kotoba-lang/langchain
          {:local/root "../../kotoba-lang/langchain"}}}
-  ;; clojure -M:dev:run  -> drive the demo through one OperationActor
+  ;; kbb -M:dev:run  -> drive the demo through one OperationActor
   :run {:main-opts ["-m" "heavyequip.sim"]}
   :export {:main-opts ["-m" "heavyequip.export-run"]}
-  ;; clojure -M:dev:render-html [out-file] -> regenerate
+  ;; kbb -M:dev:render-html [out-file] -> regenerate
   ;; docs/samples/operator-console.html through the real actor graph.
   :render-html {:main-opts ["-m" "heavyequip.render-html"]}
   :test {:extra-paths ["test"]
