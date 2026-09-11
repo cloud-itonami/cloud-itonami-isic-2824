@@ -1,0 +1,22 @@
+{:format :kotoba.cljk-origin/v1
+ :renamed-on "2026-09-11"
+ :decision "adr-2609111500-cljk-rename-all-clojure-source (com-junkawasaki/root 90-docs/adr; owner instruction 2026-09-11)"
+ :rule "value = the extension the file had before the rename. A path ending in .clj.cljk or .cljs.cljk kept it in the name because both platform files existed (or the plain target was taken)."
+ :origins
+ {"src/heavyequip/export.cljk" ".cljc"
+  "src/heavyequip/export_run.cljk" ".clj"
+  "src/heavyequip/facts.cljk" ".cljc"
+  "src/heavyequip/governor.cljk" ".cljc"
+  "src/heavyequip/heavyequipadvisor.cljk" ".cljc"
+  "src/heavyequip/operation.cljk" ".cljc"
+  "src/heavyequip/phase.cljk" ".cljc"
+  "src/heavyequip/registry.cljk" ".cljc"
+  "src/heavyequip/render_html.cljk" ".clj"
+  "src/heavyequip/sim.cljk" ".cljc"
+  "src/heavyequip/store.cljk" ".cljc"
+  "test/heavyequip/export_test.cljk" ".clj"
+  "test/heavyequip/facts_test.cljk" ".clj"
+  "test/heavyequip/governor_contract_test.cljk" ".clj"
+  "test/heavyequip/phase_test.cljk" ".clj"
+  "test/heavyequip/registry_test.cljk" ".clj"
+  "test/heavyequip/store_contract_test.cljk" ".clj"}}
