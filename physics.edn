@@ -1,0 +1,35 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README "Robotics premise": robots do assembly, fit-up, finishing and the
+;; stability / braking-test scan of mining, quarrying and construction
+;; machinery under an actor and an independent Heavy Equipment Governor,
+;; which never issues a stability certificate itself. The work measured here:
+;; the braking test of a laden wheel loader on a 10-degree grade (tip-over
+;; margin against the brake deceleration), and fitting a bucket-tooth adapter
+;; or pin at the assembly station.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-2824"
+ :cases
+ [{:id :loader-grade-brake-test
+   :kind :transport
+   :procedure "laden wheel loader (3 t in the bucket, carry position) on the 10-degree test grade brakes from 20 km/h; the brake deceleration is swept"
+   :params {:mass-kg 15000.0 :payload-kg 3000.0 :distance-m 120.0 :v-max-mps 5.5 :a-max-mps2 1.0
+            :drive-force-n 90000.0 :crr 0.03 :slope-deg 10.0
+            :cog-height-m 1.3 :support-half-length-m 1.5 :payload-cog-height-m 1.0
+            :max-time-s 600.0}
+   :sweep {:param :brake-decel-mps2 :values [1.5 2.5 3.5 4.5 5.5]}
+   :quantity :min-tipover-margin
+   :limit {:min 0.3 :basis "estimate: longitudinal reserve at the braking test; the machine's own braking performance is certified separately (ISO 3450), not by this number"}
+   :boundary {:lo 0.5 :hi 9.0}}
+  {:id :tooth-adapter-fit-up
+   :kind :manipulator
+   :procedure "heavy-payload arm lifts a bucket-tooth adapter / hinge pin from the kit cart and holds it at the bucket lip for welding / insertion"
+   :params {:l1-m 0.90 :l2-m 0.80 :m1-kg 25.0 :m2-kg 15.0
+            :from [1.00 0.10] :to [0.60 0.80] :duration-s 3.0 :steps 400}
+   :sweep {:param :payload-kg :values [5.0 10.0 20.0 35.0 50.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 900.0 :basis "estimate: continuous shoulder torque of a ~60 kg-class industrial arm"}
+   :boundary {:lo 1.0 :hi 200.0}}]}
