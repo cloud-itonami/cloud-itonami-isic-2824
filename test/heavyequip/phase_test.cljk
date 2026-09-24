@@ -3,7 +3,7 @@
   regress on: `:actuation/dispatch-unit`/`:actuation/issue-
   stability-certificate` must NEVER be a member of any phase's
   `:auto` set."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [heavyequip.phase :as phase]))
 
 (deftest dispatch-unit-never-auto-at-any-phase
