@@ -1,5 +1,5 @@
 (ns heavyequip.registry-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [heavyequip.registry :as r]))
 
 ;; ----------------------------- unit-stability-margin-out-of-range? -----------------------------
